@@ -1,0 +1,45 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+header {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 2em 1em;
+}
+.subtitle {
+  font-size: 1.2em;
+  margin-top: 0.5em;
+  height: 1.5em;
+}
+.donation-section, .social-section, .slideshow, .mission, .vision {
+  padding: 2em;
+  text-align: center;
+}
+.qr {
+  width: 200px;
+  margin-top: 1em;
+}
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #0073e6;
+}
+.slideshow-container img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: none;
+}
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  margin-top: 2em;
+}
