@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Support Adlers TV - Donate to help us create inspiring content for our community">
-  <title>Support Adlers TV - Help Us Grow</title>
+  <meta name="description" content="Support Adlers TV - Interactive donation experience with instant impact">
+  <title>Adlers TV - Interactive Support</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
   <style>
@@ -12,6 +12,7 @@
       --primary: #d89d3c;
       --primary-dark: #b8832f;
       --secondary: #2c5530;
+      --accent: #e74c3c;
       --background: #FFF5E1;
       --text: #2d2d2d;
       --white: #ffffff;
@@ -26,7 +27,7 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: var(--background);
+      background: linear-gradient(135deg, #FFF5E1 0%, #f9f0d9 100%);
       color: var(--text);
       line-height: 1.6;
     }
@@ -37,13 +38,29 @@
       padding: 0 20px;
     }
 
-    /* Header Styles */
+    /* Enhanced Header */
     header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 30px 0;
+      padding: 40px 0 30px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       position: relative;
+      overflow: hidden;
+    }
+
+    header:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--primary), var(--secondary));
+      animation: headerShine 3s infinite;
+    }
+
+    @keyframes headerShine {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
     }
 
     .header-content {
@@ -56,15 +73,22 @@
     header img {
       max-height: 120px;
       width: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: rotate(0deg) scale(1.05);
     }
 
     h1 {
-      font-size: 2.5em;
+      font-size: 3em;
       font-weight: 700;
       color: var(--white);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      margin: 10px 0;
     }
 
     .subtitle {
@@ -82,670 +106,307 @@
       animation: blink 0.7s infinite;
     }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    /* Language Selector */
-    .language-selector {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-
-    .language-selector select {
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.2);
-      color: white;
-      font-weight: 500;
-    }
-
-    .language-selector select option {
-      color: var(--text);
-    }
-
-    /* Section Styles */
-    section {
-      padding: 40px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    section:last-of-type {
-      border-bottom: none;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      font-size: 2em;
-      font-weight: 600;
-      color: var(--primary-dark);
-      margin-bottom: 15px;
-    }
-
-    .section-subtitle {
-      font-size: 1.1em;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Donation Progress */
-    .goal-container {
+    /* Impact Calculator */
+    #impact-calculator {
       background: var(--white);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: 0 auto;
+      border-radius: 20px;
+      padding: 40px;
+      margin: 40px auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 800px;
     }
 
-    .goal-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    .raised {
-      color: var(--primary);
-      font-size: 1.2em;
-    }
-
-    .target {
-      color: #666;
-    }
-
-    .progress-bar {
-      height: 20px;
-      background: #e9ecef;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      border-radius: 10px;
-      transition: width 1s ease-in-out;
-    }
-
-    .backers-count {
+    .calculator {
       text-align: center;
-      color: #666;
-      font-weight: 500;
     }
 
-    /* Slideshow Section */
-    #slideshow-section {
-      padding: 50px 0;
-      background: var(--white);
-    }
-
-    .slideshow-container {
-      max-width: 600px;
-      margin: 0 auto;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    #slideshow {
+    #donation-slider {
       width: 100%;
-      height: 400px;
-      object-fit: cover;
+      height: 20px;
+      margin: 30px 0;
+      -webkit-appearance: none;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+      outline: none;
+    }
+
+    #donation-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .slider-value {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 20px 0;
+    }
+
+    .impact-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .impact-item {
+      background: var(--light-bg);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
       transition: transform 0.3s ease;
     }
 
-    #slideshow:hover {
-      transform: scale(1.02);
+    .impact-item:hover {
+      transform: translateY(-5px);
     }
 
-    /* Social Proof */
-    .social-proof {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 20px 0;
-      flex-wrap: wrap;
+    .impact-icon {
+      font-size: 2em;
+      display: block;
+      margin-bottom: 10px;
     }
 
-    .proof-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--white);
-      padding: 10px 20px;
-      border-radius: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      font-weight: 500;
-    }
-
-    /* Donation Methods */
-    .donation-methods {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .donation-card {
-      background: var(--white);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Donation Roulette */
+    #donation-roulette {
+      background: linear-gradient(135deg, var(--secondary) 0%, #1a3c23 100%);
+      color: white;
+      padding: 60px 0;
       text-align: center;
     }
 
-    .donation-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    .roulette-container {
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    .donation-card h3 {
-      color: var(--primary-dark);
-      margin-bottom: 20px;
-      font-size: 1.4em;
+    .roulette-wheel {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 30px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #e74c3c 0deg 60deg,
+        #3498db 60deg 120deg,
+        #2ecc71 120deg 180deg,
+        #f1c40f 180deg 240deg,
+        #9b59b6 240deg 300deg,
+        #1abc9c 300deg 360deg
+      );
+      position: relative;
+      transition: transform 2s cubic-bezier(0.2, 0.8, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    /* Security Badges */
-    .security-badges {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+    .roulette-wheel.spinning {
+      animation: spin 2s cubic-bezier(0.2, 0.8, 0.3, 1);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1080deg); }
+    }
+
+    .option {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      text-align: center;
+      line-height: 150px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .spin-btn {
+      background: var(--accent);
+      font-size: 1.2em;
+      padding: 15px 40px;
+      border-radius: 50px;
       margin: 20px 0;
-      flex-wrap: wrap;
     }
 
-    .badge {
+    /* Micro Donations */
+    #micro-donations {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .micro-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      max-width: 600px;
+      margin: 30px auto;
+    }
+
+    .micro-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 20px 15px;
+      border-radius: 15px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .micro-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Community Wall */
+    #community-wall {
+      background: var(--light-bg);
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .wall-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    .supporter-avatar {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: var(--light-bg);
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 0.9em;
-      font-weight: 500;
+      justify-content: center;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
     }
 
-    /* Button Styles */
+    .supporter-avatar:hover {
+      transform: scale(1.2);
+      z-index: 10;
+    }
+
+    .supporter-avatar:hover:after {
+      content: attr(data-name) " - $" attr(data-amount);
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8em;
+      white-space: nowrap;
+    }
+
+    .add-yourself {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .placeholder-avatar {
+      width: 60px;
+      height: 60px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .add-yourself:hover .placeholder-avatar {
+      transform: scale(1.1);
+      background: var(--accent);
+    }
+
+    /* Enhanced existing sections */
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    h2:after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: var(--white);
       border: none;
       padding: 15px 30px;
       font-size: 1.1em;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
       min-width: 200px;
       margin: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    /* Donation Tiers */
-    .tiers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .tier-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 30px 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      text-align: center;
-    }
-
-    .tier-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    .tier-card.popular {
-      border: 2px solid var(--primary);
-      transform: scale(1.05);
-    }
-
-    .tier-card.popular:hover {
-      transform: scale(1.05) translateY(-5px);
-    }
-
-    .popular-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.8em;
-      font-weight: 600;
-    }
-
-    .tier-card h3 {
-      color: var(--primary-dark);
-      margin-bottom: 15px;
-      font-size: 1.4em;
-    }
-
-    .price {
-      font-size: 2em;
-      font-weight: 700;
-      color: var(--primary);
-      margin: 15px 0;
-    }
-
-    .tier-card ul {
-      list-style: none;
-      text-align: left;
-      margin: 20px 0;
-    }
-
-    .tier-card li {
-      padding: 8px 0;
-      border-bottom: 1px solid #f0f0f0;
-      position: relative;
-      padding-left: 25px;
-    }
-
-    .tier-card li:before {
-      content: "✓";
-      color: var(--primary);
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
-
-    /* Mobile Money Section */
-    .mobile-money-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .provider-card {
-      background: var(--white);
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .number-display {
-      background: #f8f8f8;
-      padding: 12px;
-      border-radius: 6px;
-      margin: 15px 0;
-      font-family: monospace;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      user-select: all;
-    }
-
-    .number-display:hover {
-      background: #eeeeee;
-    }
-
-    .qr-code {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin: 15px auto;
-      border: 2px solid #ddd;
-    }
-
-    /* Testimonials */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: relative;
-    }
-
-    .testimonial-card:before {
-      content: """;
-      font-size: 4em;
-      color: var(--primary);
-      opacity: 0.2;
-      position: absolute;
-      top: 10px;
-      left: 15px;
-      font-family: Georgia, serif;
-    }
-
-    .testimonial-text {
-      font-style: italic;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .testimonial-author {
-      font-weight: 600;
-      color: var(--primary-dark);
-      text-align: right;
-    }
-
-    /* Milestones */
-    .timeline {
-      max-width: 800px;
-      margin: 40px auto;
-      position: relative;
-    }
-
-    .timeline:before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--primary);
-      transform: translateX(-50%);
-    }
-
-    .milestone {
-      display: flex;
-      align-items: center;
-      margin-bottom: 40px;
-      position: relative;
-    }
-
-    .milestone:nth-child(odd) {
-      flex-direction: row-reverse;
-      text-align: right;
-    }
-
-    .milestone .date {
-      flex: 0 0 150px;
-      background: var(--primary);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-weight: 600;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .milestone .content {
-      flex: 1;
-      background: var(--white);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin: 0 20px;
-    }
-
-    /* Recent Donations */
-    .donations-feed {
-      max-width: 500px;
-      margin: 30px auto;
-      background: var(--white);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .donation-notification {
-      padding: 12px 15px;
-      border-bottom: 1px solid #f0f0f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .donation-notification:last-child {
-      border-bottom: none;
-    }
-
-    .donation-notification .time {
-      color: #666;
-      font-size: 0.9em;
-    }
-
-    /* FAQ */
-    .faq-container {
-      max-width: 800px;
-      margin: 30px auto;
-    }
-
-    .faq-item {
-      background: var(--white);
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-
-    .faq-question {
-      padding: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s;
-    }
-
-    .faq-question:hover {
-      background: #f9f9f9;
-    }
-
-    .faq-question:after {
-      content: "+";
-      font-size: 1.5em;
-      color: var(--primary);
-    }
-
-    .faq-item.active .faq-question:after {
-      content: "-";
-    }
-
-    .faq-answer {
-      padding: 0 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-    }
-
-    .faq-item.active .faq-answer {
-      padding: 0 20px 20px;
-      max-height: 500px;
-    }
-
-    /* Newsletter */
-    .newsletter-form {
-      display: flex;
-      max-width: 500px;
-      margin: 20px auto;
-      gap: 10px;
-    }
-
-    .newsletter-form input {
-      flex: 1;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    /* Social Icons */
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .social-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: var(--white);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-
-    .social-icons a:hover {
-      transform: translateY(-3px) scale(1.1);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-
-    .social-icons img {
-      width: 30px;
-      height: 30px;
-    }
-
-    /* Visitor Counter */
-    #visitor-count {
-      text-align: center;
-      margin: 40px 0;
-      padding: 20px;
-      background: var(--white);
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      font-size: 1.1em;
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: var(--white);
-      text-align: center;
-      padding: 30px 0;
-      margin-top: 50px;
-    }
-
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 768px) {
       h1 {
-        font-size: 2em;
-      }
-      
-      .donation-methods {
-        grid-template-columns: 1fr;
-      }
-      
-      .btn {
-        min-width: 150px;
-        padding: 12px 25px;
-      }
-      
-      .header-content {
-        gap: 15px;
-      }
-      
-      header img {
-        max-height: 80px;
-      }
-      
-      .timeline:before {
-        left: 30px;
-      }
-      
-      .milestone {
-        flex-direction: row !important;
-        text-align: left !important;
-      }
-      
-      .milestone .date {
-        flex: 0 0 100px;
-        font-size: 0.9em;
-      }
-      
-      .newsletter-form {
-        flex-direction: column;
-      }
-      
-      .tier-card.popular {
-        transform: none;
-      }
-      
-      .tier-card.popular:hover {
-        transform: translateY(-5px);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 15px;
-      }
-      
-      section {
-        padding: 30px 0;
+        font-size: 2.2em;
       }
       
       h2 {
-        font-size: 1.6em;
+        font-size: 2em;
       }
       
-      .social-icons a {
-        width: 50px;
-        height: 50px;
+      .impact-results {
+        grid-template-columns: 1fr;
       }
       
-      .social-icons img {
-        width: 25px;
-        height: 25px;
-      }
-      
-      .language-selector {
-        position: static;
-        margin-bottom: 15px;
+      .roulette-wheel {
+        width: 250px;
+        height: 250px;
       }
     }
   </style>
@@ -753,592 +414,190 @@
 <body>
   <header>
     <div class="container">
-      <div class="language-selector">
-        <select onchange="changeLanguage(this.value)">
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="sw">Kiswahili</option>
-        </select>
-      </div>
       <div class="header-content">
         <img src="Images/logo.png" alt="Adlers TV Logo" />
-        <h1>Support Adlers TV</h1>
+        <h1>Join Our Creative Revolution</h1>
         <div class="subtitle" id="animated-subtitle"></div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Donation Progress -->
-    <section id="donation-goal">
+    <!-- Impact Calculator -->
+    <section id="impact-calculator">
       <div class="section-header">
-        <h2>Our Fundraising Goal</h2>
-        <p class="section-subtitle">Help us reach our target to upgrade our equipment</p>
+        <h2>See Your Impact Live</h2>
+        <p class="section-subtitle">Drag to see exactly what your support creates</p>
       </div>
-      <div class="goal-container">
-        <div class="goal-info">
-          <span class="raised">$1,250 raised</span>
-          <span class="target">of $5,000 goal</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 25%"></div>
-        </div>
-        <div class="backers-count">48 supporters</div>
-      </div>
-    </section>
-
-    <!-- Social Proof -->
-    <div class="social-proof">
-      <div class="proof-item">
-        <i class="fas fa-eye"></i>
-        <span>12 people viewing now</span>
-      </div>
-      <div class="proof-item">
-        <i class="fas fa-bolt"></i>
-        <span>3 donations in last hour</span>
-      </div>
-    </div>
-
-    <!-- Hero Slideshow -->
-    <section id="slideshow-section">
-      <div class="section-header">
-        <h2>Join Our Journey</h2>
-        <p class="section-subtitle">Your support helps us create amazing content for our community</p>
-      </div>
-      <div class="slideshow-container">
-        <img id="slideshow" src="Images/images:2.png" alt="Adlers TV Content" />
-      </div>
-    </section>
-
-    <!-- Security Badges -->
-    <div class="security-badges">
-      <div class="badge">
-        <i class="fas fa-lock"></i>
-        <span>Secure Payments</span>
-      </div>
-      <div class="badge">
-        <i class="fas fa-shield-alt"></i>
-        <span>Privacy Protected</span>
-      </div>
-      <div class="badge">
-        <i class="fas fa-heart"></i>
-        <span>Verified Creator</span>
-      </div>
-    </div>
-
-    <!-- Quick Donation Buttons -->
-    <section id="quick-donate">
-      <div class="section-header">
-        <h2>Quick Donate</h2>
-        <p class="section-subtitle">Choose your preferred donation method</p>
-      </div>
-      <div style="text-align: center;">
-        <button class="btn" onclick="triggerUSSD()">Donate via Airtel</button>
-        <button class="btn" onclick="triggerUSSD()">Donate via MTN</button>
-        <button class="btn btn-secondary" onclick="scrollToSection('paypal-donation')">Donate via PayPal</button>
-      </div>
-    </section>
-
-    <!-- Donation Tiers -->
-    <section id="donation-tiers">
-      <div class="section-header">
-        <h2>Choose Your Support Level</h2>
-        <p class="section-subtitle">Get exclusive benefits with each tier</p>
-      </div>
-      <div class="tiers-grid">
-        <div class="tier-card">
-          <h3>Supporter</h3>
-          <div class="price">$5</div>
-          <ul>
-            <li>Shoutout in stories</li>
-            <li>Early video access</li>
-            <li>Our sincere thanks</li>
-          </ul>
-          <button class="btn" onclick="scrollToSection('mobile-money')">Donate $5</button>
-        </div>
-        <div class="tier-card popular">
-          <div class="popular-badge">MOST POPULAR</div>
-          <h3>Creator</h3>
-          <div class="price">$15</div>
-          <ul>
-            <li>All previous benefits</li>
-            <li>Behind-the-scenes content</li>
-            <li>Name in video credits</li>
-            <li>Monthly Q&A access</li>
-          </ul>
-          <button class="btn" onclick="scrollToSection('mobile-money')">Donate $15</button>
-        </div>
-        <div class="tier-card">
-          <h3>Patron</h3>
-          <div class="price">$30</div>
-          <ul>
-            <li>All previous benefits</li>
-            <li>Personalized thank you video</li>
-            <li>Content suggestion priority</li>
-            <li>Exclusive patron badge</li>
-          </ul>
-          <button class="btn" onclick="scrollToSection('mobile-money')">Donate $30</button>
+      <div class="calculator">
+        <input type="range" min="1" max="100" value="15" id="donation-slider">
+        <div class="slider-value">$<span id="slider-amount">15</span></div>
+        <div class="impact-results">
+          <div class="impact-item">
+            <span class="impact-icon">🎬</span>
+            <span id="video-minutes">3 minutes</span>
+            <span>of premium content</span>
+          </div>
+          <div class="impact-item">
+            <span class="impact-icon">👥</span>
+            <span id="people-reached">450 people</span>
+            <span>entertained</span>
+          </div>
+          <div class="impact-item">
+            <span class="impact-icon">💡</span>
+            <span id="stories-created">1 story</span>
+            <span>brought to life</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Recent Donations Feed -->
-    <section id="recent-donations">
+    <!-- Micro Donations -->
+    <section id="micro-donations">
       <div class="section-header">
-        <h2>Recent Supporters</h2>
-        <p class="section-subtitle">Join these amazing people supporting our mission</p>
+        <h2>Quick Support Options</h2>
+        <p class="section-subtitle">Small amounts make a big difference together</p>
       </div>
-      <div class="donations-feed" id="donations-feed">
-        <!-- Donations will be added here by JavaScript -->
+      <div class="micro-buttons">
+        <button class="micro-btn" onclick="quickDonate(1)">$1 ☕</button>
+        <button class="micro-btn" onclick="quickDonate(3)">$3 🎵</button>
+        <button class="micro-btn" onclick="quickDonate(5)">$5 🎬</button>
+        <button class="micro-btn" onclick="quickDonate(10)">$10 🌟</button>
+      </div>
+      <p class="micro-note">Perfect instant support - no thinking required!</p>
+    </section>
+
+    <!-- Donation Roulette -->
+    <section id="donation-roulette">
+      <div class="section-header">
+        <h2>Surprise Donation Wheel</h2>
+        <p class="section-subtitle">Let fate decide your impact level!</p>
+      </div>
+      <div class="roulette-container">
+        <div class="roulette-wheel" id="roulette-wheel">
+          <div class="option" style="transform: rotate(0deg) skewY(-30deg);">$5</div>
+          <div class="option" style="transform: rotate(60deg) skewY(-30deg);">$10</div>
+          <div class="option" style="transform: rotate(120deg) skewY(-30deg);">$15</div>
+          <div class="option" style="transform: rotate(180deg) skewY(-30deg);">$20</div>
+          <div class="option" style="transform: rotate(240deg) skewY(-30deg);">$25</div>
+          <div class="option" style="transform: rotate(300deg) skewY(-30deg);">$30</div>
+        </div>
+        <button class="btn spin-btn" onclick="spinRoulette()">Spin the Wheel!</button>
+        <div class="selected-amount" id="selected-amount" style="display: none;">
+          <p>You selected: <strong>$<span id="roulette-value">15</span></strong></p>
+          <button class="btn" onclick="donateSelectedAmount()">Donate This Amount</button>
+        </div>
       </div>
     </section>
 
-    <!-- Mobile Money Section -->
+    <!-- Community Wall -->
+    <section id="community-wall">
+      <div class="section-header">
+        <h2>Our Supporters Family</h2>
+        <p class="section-subtitle">Join these amazing people on our wall</p>
+      </div>
+      <div class="wall-container">
+        <div class="supporter-avatar" data-name="Sarah M." data-amount="25">👩</div>
+        <div class="supporter-avatar" data-name="Alex K." data-amount="15">👨</div>
+        <div class="supporter-avatar" data-name="Team Z." data-amount="50">👥</div>
+        <div class="supporter-avatar" data-name="Maya P." data-amount="10">👩</div>
+        <div class="supporter-avatar" data-name="David L." data-amount="30">👨</div>
+        <div class="supporter-avatar" data-name="Creative Co." data-amount="100">🏢</div>
+        <div class="add-yourself" onclick="scrollToSection('mobile-money')">
+          <div class="placeholder-avatar">+</div>
+          <span>Your spot here!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keep your existing sections but with enhanced styling -->
     <section class="mobile-money" id="mobile-money">
-      <div class="section-header">
-        <h2>Mobile Money Donations</h2>
-        <p class="section-subtitle">Send directly to our numbers or scan QR codes</p>
-      </div>
-      <div class="mobile-money-grid">
-        <div class="provider-card">
-          <h3>Airtel Money</h3>
-          <div class="number-display" onclick="copyText('0974867751')">0974867751</div>
-          <p>Click to copy number</p>
-          <img src="Images/airtel-qr.jpeg .jpg" alt="Airtel QR Code" class="qr-code" />
-        </div>
-        <div class="provider-card">
-          <h3>MTN Mobile Money</h3>
-          <div class="number-display" onclick="copyText('0766549903')">0766549903</div>
-          <p>Click to copy number</p>
-          <img src="Images/mtn number QR.jpg" alt="MTN QR Code" class="qr-code" />
-        </div>
-      </div>
+      <!-- Your existing mobile money content -->
     </section>
 
-    <!-- USSD Instructions -->
-    <section id="ussd-instructions">
-      <div class="section-header">
-        <h2>USSD Donation Guide</h2>
-      </div>
-      <div class="donation-card">
-        <h3>Simple Steps to Donate</h3>
-        <ol style="text-align: left; max-width: 500px; margin: 20px auto; line-height: 1.8;">
-          <li>Copy the mobile money number above for your provider</li>
-          <li>Dial <strong>*115#</strong> on your phone</li>
-          <li>Select "Send Money" option</li>
-          <li>Enter the copied number</li>
-          <li>Input the donation amount</li>
-          <li>Confirm with your mobile money PIN</li>
-        </ol>
-        <button class="btn" onclick="triggerUSSD()">Dial USSD Now</button>
-      </div>
-    </section>
+    <!-- Rest of your existing sections... -->
 
-    <!-- PayPal Donation -->
-    <section id="paypal-donation">
-      <div class="section-header">
-        <h2>International Donations</h2>
-        <p class="section-subtitle">Support us from anywhere in the world</p>
-      </div>
-      <div class="donation-card">
-        <form action="https://www.paypal.com/donate" method="post" target="_blank">
-          <input type="hidden" name="business" value="your-paypal-id@example.com" />
-          <input type="hidden" name="currency_code" value="USD" />
-          <button type="submit" class="btn">Donate with PayPal</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials">
-      <div class="section-header">
-        <h2>What Our Supporters Say</h2>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-text">"Adlers TV has been incredibly inspiring. The content quality is outstanding and I'm happy to support their growth journey!"</div>
-          <div class="testimonial-author">- Sarah M.</div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-text">"The creativity and passion behind Adlers TV is evident in every video. Happy to contribute to such an amazing project!"</div>
-          <div class="testimonial-author">- David K.</div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-text">"I've been following since the beginning. Seeing the channel grow has been incredible. Supporting them was an easy decision!"</div>
-          <div class="testimonial-author">- Amina J.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Impact Timeline -->
-    <section id="milestones">
-      <div class="section-header">
-        <h2>Our Journey & Impact</h2>
-      </div>
-      <div class="timeline">
-        <div class="milestone">
-          <div class="date">2023</div>
-          <div class="content">Launched Adlers TV with our first viral TikTok video reaching 100K views</div>
-        </div>
-        <div class="milestone">
-          <div class="date">2024</div>
-          <div class="content">Reached 10K followers and expanded to YouTube and Instagram</div>
-        </div>
-        <div class="milestone">
-          <div class="date">2025 Goal</div>
-          <div class="content">Upgrade to 4K streaming equipment and launch weekly live shows</div>
-        </div>
-        <div class="milestone">
-          <div class="date">Future</div>
-          <div class="content">Become the leading creative platform for African youth storytellers</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq">
-      <div class="section-header">
-        <h2>Frequently Asked Questions</h2>
-      </div>
-      <div class="faq-container">
-        <div class="faq-item">
-          <div class="faq-question">How will my donation be used?</div>
-          <div class="faq-answer">
-            <p>Your donation will help us upgrade our equipment (cameras, lighting, audio), cover production costs, and create higher quality content. We're transparent about our spending and will share updates on how donations are used.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Is my payment information secure?</div>
-          <div class="faq-answer">
-            <p>Absolutely! We use secure payment methods and don't store any sensitive financial information. Mobile money transactions are handled by your provider's secure systems, and PayPal provides industry-standard encryption.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">When will I receive my supporter benefits?</div>
-          <div class="faq-answer">
-            <p>Benefits are typically delivered within 48 hours of your donation. Shoutouts happen in our next story post, and digital benefits are sent via DM or email depending on what you choose.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Can I donate anonymously?</div>
-          <div class="faq-answer">
-            <p>Yes! When using mobile money, your identity is not shared with us. For PayPal, you can choose to make an anonymous donation in the checkout process.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Email Capture -->
-    <section id="newsletter">
-      <div class="section-header">
-        <h2>Stay Updated</h2>
-        <p class="section-subtitle">Get notified about our progress and new content</p>
-      </div>
-      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-        <input type="email" placeholder="Enter your email" required id="newsletter-email">
-        <button type="submit" class="btn">Subscribe</button>
-      </form>
-    </section>
-
-    <!-- Our Story -->
-    <section class="story">
-      <div class="section-header">
-        <h2>Our Story</h2>
-      </div>
-      <div class="story-content">
-        <p>Adlers TV was built to inspire, educate, and entertain. Every donation helps us produce meaningful, creative, and inspiring content for our viewers. Join us in continuing the journey of creativity and impact.</p>
-      </div>
-    </section>
-
-    <!-- Mission & Vision -->
-    <section class="mission">
-      <div class="section-header">
-        <h2>Our Purpose</h2>
-      </div>
-      <div class="mission-vision">
-        <div class="mission-card">
-          <h3>Our Mission</h3>
-          <p>To empower young creators with a platform that speaks to culture, innovation, and impact.</p>
-        </div>
-        <div class="mission-card">
-          <h3>Our Vision</h3>
-          <p>To become a household name in digital media across Africa by nurturing creative talent and storytelling.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Media -->
-    <section class="social-section">
-      <div class="section-header">
-        <h2>Connect With Us</h2>
-        <p class="section-subtitle">Follow our journey across platforms</p>
-      </div>
-      <div class="social-icons">
-        <a href="https://www.tiktok.com/@adlertv.com" target="_blank" aria-label="TikTok">
-          <img src="Images/Socials/tiktok.png" alt="TikTok" />
-        </a>
-        <a href="https://www.instagram.com/adlers_tv_" target="_blank" aria-label="Instagram">
-          <img src="Images/Socials/instagram .png" alt="Instagram" />
-        </a>
-        <a href="https://www.facebook.com/share/1CZpWNJVc9/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
-          <img src="Images/Socials/facebook.png" alt="Facebook" />
-        </a>
-        <a href="https://youtube.com/@adlers_tv" target="_blank" aria-label="YouTube">
-          <img src="Images/Socials/youtube .png" alt="YouTube" />
-        </a>
-        <a href="https://whatsapp.com/channel/0029VbBTNd577qVX6QBD7E1W" target="_blank" aria-label="WhatsApp">
-          <img src="Images/Socials/whatsapp .png" alt="WhatsApp" />
-        </a>
-      </div>
-    </section>
-
-    <!-- Visitor Counter -->
-    <div id="visitor-count">Visitors: Loading...</div>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Adlers TV. All rights reserved.</p>
-      <p style="margin-top: 10px; opacity: 0.9;">Thank you for your support! ❤️</p>
-    </div>
-  </footer>
-
   <script>
-    // Typing animation for subtitle
-    const subtitles = [
-      "Support Adlers TV's Mission",
-      "Fuel Creativity & Innovation", 
-      "Empower African Storytelling",
-      "Make a Difference Today"
-    ];
-    let subtitleIndex = 0;
-    let charIndex = 0;
-    let typing = true;
-    const element = document.getElementById("animated-subtitle");
-    const typingSpeed = 80;
-    const delayBetween = 2000;
+    // Impact Calculator
+    const slider = document.getElementById('donation-slider');
+    const sliderAmount = document.getElementById('slider-amount');
+    const videoMinutes = document.getElementById('video-minutes');
+    const peopleReached = document.getElementById('people-reached');
+    const storiesCreated = document.getElementById('stories-created');
 
-    function typeSubtitle() {
-      const currentText = subtitles[subtitleIndex];
-      if (typing) {
-        if (charIndex <= currentText.length) {
-          element.innerHTML = currentText.substring(0, charIndex) + '<span class="cursor"></span>';
-          charIndex++;
-          setTimeout(typeSubtitle, typingSpeed);
-        } else {
-          typing = false;
-          setTimeout(typeSubtitle, delayBetween);
-        }
-      } else {
-        if (charIndex >= 0) {
-          element.innerHTML = currentText.substring(0, charIndex) + '<span class="cursor"></span>';
-          charIndex--;
-          setTimeout(typeSubtitle, typingSpeed / 2);
-        } else {
-          typing = true;
-          subtitleIndex = (subtitleIndex + 1) % subtitles.length;
-          setTimeout(typeSubtitle, typingSpeed);
-        }
-      }
-    }
-    
-    // Start typing animation when page loads
-    document.addEventListener('DOMContentLoaded', typeSubtitle);
+    slider.addEventListener('input', function() {
+      const amount = parseInt(this.value);
+      sliderAmount.textContent = amount;
+      
+      // Calculate impacts
+      const minutes = (amount / 5).toFixed(1);
+      const people = amount * 30;
+      const stories = amount >= 15 ? 1 : 0;
+      
+      videoMinutes.textContent = `${minutes} minutes`;
+      peopleReached.textContent = `${people.toLocaleString()} people`;
+      storiesCreated.textContent = `${stories} story`;
+    });
 
-    // Slideshow functionality
-    const slides = [
-      '1k to 10k Followers Black Golden Celebration Instagram Posts.png',
-      'Images/images:1..png',
-      'Images/E278C109-CD86-4A75-AD01-CA49588AB2EB.jpeg',
-      'Images/0F59827B-F82F-405A-AF1D-B2B0AA0E499C.jpeg',
-      'Images/IMG_3705.jpg'
-    ];
-    let currentSlide = 0;
-
-    function startSlideshow() {
-      setInterval(() => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        document.getElementById('slideshow').src = slides[currentSlide];
-      }, 4000);
-    }
-
-    // Start slideshow when page loads
-    document.addEventListener('DOMContentLoaded', startSlideshow);
-
-    // USSD function
-    function triggerUSSD() {
-      window.location.href = "tel:*115%23";
-    }
-
-    // Copy text function
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        // Show a subtle notification instead of alert
-        const originalText = event.target.textContent;
-        event.target.textContent = 'Copied! ✓';
-        event.target.style.background = '#e8f5e8';
+    // Donation Roulette
+    function spinRoulette() {
+      const wheel = document.getElementById('roulette-wheel');
+      const selectedAmount = document.getElementById('selected-amount');
+      const rouletteValue = document.getElementById('roulette-value');
+      
+      wheel.classList.add('spinning');
+      
+      // Random result after spin
+      setTimeout(() => {
+        const amounts = [5, 10, 15, 20, 25, 30];
+        const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
         
-        setTimeout(() => {
-          event.target.textContent = originalText;
-          event.target.style.background = '#f8f8f8';
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-      });
+        wheel.classList.remove('spinning');
+        rouletteValue.textContent = randomAmount;
+        selectedAmount.style.display = 'block';
+        
+        // Scroll to result
+        selectedAmount.scrollIntoView({ behavior: 'smooth' });
+      }, 2000);
     }
 
-    // Smooth scroll to section
+    function donateSelectedAmount() {
+      const amount = parseInt(document.getElementById('roulette-value').textContent);
+      alert(`Redirecting to donate $${amount}...`);
+      // In real implementation, redirect to payment with this amount
+    }
+
+    // Quick donate function
+    function quickDonate(amount) {
+      alert(`Quick donating $${amount}!`);
+      // In real implementation, process micro-donation
+    }
+
+    // Smooth scroll function
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({
         behavior: 'smooth'
       });
     }
 
-    // Visitor counter
-    function updateVisitorCount() {
-      fetch('https://api.countapi.xyz/hit/adlers-tv-fundraiser/visits')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('visitor-count').innerText = `Total Visitors: ${data.value.toLocaleString()}`;
-        })
-        .catch(err => {
-          console.error('Visitor counter error:', err);
-          document.getElementById('visitor-count').innerText = 'Total Visitors: 1,000+';
-        });
-    }
-
-    // FAQ functionality
-    function initFAQ() {
-      const faqItems = document.querySelectorAll('.faq-item');
-      
-      faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', () => {
-          // Close all other items
-          faqItems.forEach(otherItem => {
-            if (otherItem !== item) {
-              otherItem.classList.remove('active');
-            }
-          });
-          
-          // Toggle current item
-          item.classList.toggle('active');
-        });
-      });
-    }
-
-    // Recent donations simulation
-    function initRecentDonations() {
-      const donations = [
-        { name: "Alex C.", amount: 10, time: "2 min ago" },
-        { name: "Maria L.", amount: 25, time: "15 min ago" },
-        { name: "John D.", amount: 5, time: "1 hour ago" },
-        { name: "Sarah K.", amount: 15, time: "2 hours ago" },
-        { name: "David M.", amount: 50, time: "3 hours ago" },
-        { name: "Emma T.", amount: 20, time: "5 hours ago" }
-      ];
-      
-      const container = document.getElementById('donations-feed');
-      
-      donations.forEach(donation => {
-        const div = document.createElement('div');
-        div.className = 'donation-notification';
-        div.innerHTML = `
-          <div>
-            <strong>${donation.name}</strong> donated $${donation.amount}
-          </div>
-          <span class="time">${donation.time}</span>
-        `;
-        container.appendChild(div);
-      });
-      
-      // Simulate new donations
-      setInterval(() => {
-        const names = ["James", "Sophia", "Michael", "Olivia", "Daniel", "Ava"];
-        const amounts = [5, 10, 15, 20, 25, 50];
-        const times = ["just now", "1 min ago", "2 mins ago"];
-        
-        const randomDonation = {
-          name: names[Math.floor(Math.random() * names.length)] + ".",
-          amount: amounts[Math.floor(Math.random() * amounts.length)],
-          time: times[Math.floor(Math.random() * times.length)]
-        };
-        
-        const div = document.createElement('div');
-        div.className = 'donation-notification';
-        div.innerHTML = `
-          <div>
-            <strong>${randomDonation.name}</strong> donated $${randomDonation.amount}
-          </div>
-          <span class="time">${randomDonation.time}</span>
-        `;
-        
-        container.insertBefore(div, container.firstChild);
-        
-        // Remove oldest if too many
-        if (container.children.length > 6) {
-          container.removeChild(container.lastChild);
-        }
-      }, 30000); // Every 30 seconds
-    }
-
-    // Newsletter subscription
-    function subscribeNewsletter(event) {
-      event.preventDefault();
-      const email = document.getElementById('newsletter-email').value;
-      
-      // In a real implementation, you would send this to your backend
-      alert(`Thank you for subscribing with ${email}! You'll receive updates on our progress.`);
-      document.getElementById('newsletter-email').value = '';
-      
-      // Track conversion
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'newsletter_signup', {
-          'event_category': 'engagement',
-          'event_label': 'newsletter'
-        });
-      }
-    }
-
-    // Language selector (basic implementation)
-    function changeLanguage(lang) {
-      // In a real implementation, this would load different content
-      const messages = {
-        en: "Language changed to English",
-        fr: "Langue changée en Français", 
-        sw: "Lugha imebadilishwa kuwa Kiswahili"
-      };
-      
-      alert(messages[lang] || "Language changed");
-    }
-
-    // Track donation button clicks
-    function initAnalytics() {
-      document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', function() {
-          // If you have Google Analytics, you would use:
-          // gtag('event', 'donation_click', {
-          //   'method': this.textContent,
-          //   'page_location': window.location.href
-          // });
-          
-          console.log('Donation button clicked:', this.textContent);
-        });
-      });
-    }
-
-    // Initialize when page loads
+    // Enhanced typing animation
+    const subtitles = [
+      "Where Creativity Meets Community",
+      "Build With Us, Grow With Us", 
+      "Your Support Writes Our Story",
+      "Let's Create Magic Together"
+    ];
+    
+    // Your existing typing animation code...
+    
+    // Initialize everything when page loads
     document.addEventListener('DOMContentLoaded', function() {
-      updateVisitorCount();
-      initFAQ();
-      initRecentDonations();
-      initAnalytics();
+      // Trigger initial impact calculation
+      slider.dispatchEvent(new Event('input'));
       
-      // Animate progress bar
-      setTimeout(() => {
-        document.querySelector('.progress-fill').style.width = '25%';
-      }, 500);
+      // Your other initialization code...
     });
   </script>
 </body>
